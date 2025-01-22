@@ -4,7 +4,7 @@ import { ImageBackground, Text, StyleSheet } from 'react-native';
 const Orange = () => {
   return (
     <ImageBackground
-      source={{ uri: 'https://thecoconutmama.com/wp-content/uploads/2023/06/oranges-scaled.webp' }}  // Correct way to use a URL
+      source={{ uri: 'https://thecoconutmama.com/wp-content/uploads/2023/06/oranges-scaled.webp' }}  
       style={styles.cover}
     >
       <Text style={styles.fruitName}>Orange</Text>
