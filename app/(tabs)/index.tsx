@@ -1,74 +1,68 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import { Button, StyleSheet, View } from 'react-native';
+import { ThemedText } from '@/components/ThemedText'; 
+import { ThemedView } from '@/components/ThemedView';  
+import { HelloWave } from '@/components/HelloWave';   
+import { FruitsComponent } from '../../components/FruitsComponent';  //import fruit component
+import { Link } from 'expo-router'; 
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+// Handle button press
+const handlePress = () => {
+  alert("You clicked me! Below is the list");
+};
 
-export default function HomeScreen() {
+const IndexScreen = () => {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
+    <View style={styles.container}>
+      {/* ThemedView for welcome text and HelloWave component */}
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
+
+      {/* ThemedView for Welcome button */}
+      <ThemedView style={styles.buttonContainer}>
+        <Button title="Here is Our Fruit Menu -click me-" onPress={handlePress} />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+
+      {/* FruitsComponent list */}
+      <FruitsComponent />
+
+      {/* Navigation buttons */}
+      <View style={styles.navButtons}>
+        <Link href="/apple">
+          <Button title="Go to Apple" />
+        </Link>
+        <Link href="/orange">
+          <Button title="Go to Orange" />
+        </Link>
+        <Link href="/mango">
+          <Button title="Go to Mango" />
+        </Link>
+      </View>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  buttonContainer: {
+    marginTop: 20,
+    marginBottom: 20,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  navButtons: {
+    marginTop: 20,
   },
 });
+
+export default IndexScreen;
