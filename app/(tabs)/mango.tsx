@@ -4,7 +4,7 @@ import { ImageBackground, Text, StyleSheet } from 'react-native';
 const Mango = () => {
   return (
     <ImageBackground
-      source={{ uri: 'https://th.bing.com/th/id/OIP.GqqWLmKBZrwrWWFRPIFFEQHaHa?rs=1&pid=ImgDetMain' }}  // Correct URL format
+      source={{ uri: 'https://th.bing.com/th/id/OIP.GqqWLmKBZrwrWWFRPIFFEQHaHa?rs=1&pid=ImgDetMain' }}  
       style={styles.cover}
     >
       <Text style={styles.fruitName}>Mango</Text>
