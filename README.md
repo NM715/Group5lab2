@@ -9,5 +9,5 @@ Edit index.tsx file to welcome the user and add a button: Done
 Create a new components folder: Done (FruitsComponent.tsx)
 Import the list into index.tsx and display it: Done
 
-TO DO:
+TO DO:Last BIT OF BONUS
 styling the images arent in the center and routing to the images when the Go buttons are clicked
