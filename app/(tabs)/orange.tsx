@@ -1,33 +1,30 @@
 import React from 'react';
-import { ImageBackground, Text, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
-const Orange = () => {
+export default function OrangeImagePage() {
+  
+
   return (
-    <ImageBackground
-      source={{ uri: 'https://thecoconutmama.com/wp-content/uploads/2023/06/oranges-scaled.webp' }}  
-      style={styles.cover}
-    >
-      <Text style={styles.fruitName}>Orange</Text>
-    </ImageBackground>
+    <View style={styles.container}>
+      <Image
+        source={{ uri: "https://thecoconutmama.com/wp-content/uploads/2023/06/oranges-scaled.webp" }}
+        style={styles.image}
+      />
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  cover: {
-    width: 340,
-    height: 340,
-    borderRadius: 10,
-    overflow: "hidden",
-    marginBottom: 10,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
-  fruitName: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',  
-    
-    marginTop: 140,       
+  image: {
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
   },
 });
-
-export default Orange;

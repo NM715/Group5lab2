@@ -25,20 +25,11 @@ const IndexScreen = () => {
         <Button title="Here is Our Fruit Menu -click me-" onPress={handlePress} />
       </ThemedView>
 
-      {/* FruitsComponent list */}
-      <FruitsComponent />
-
       {/* Navigation buttons */}
-      <View style={styles.navButtons}>
-        <Link href="/apple">
-          <Button title="Go to Apple" />
-        </Link>
-        <Link href="/orange">
-          <Button title="Go to Orange" />
-        </Link>
-        <Link href="/mango">
-          <Button title="Go to Mango" />
-        </Link>
+      <View>
+        <Link href="/apple">Go to Apple</Link>
+        <Link href="/orange">Go to Orange</Link>
+        <Link href="/mango">Go to Mango</Link>
       </View>
     </View>
   );
@@ -50,6 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+    backgroundColor: '#990000'
   },
   titleContainer: {
     flexDirection: 'row',
@@ -60,9 +52,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
   },
-  navButtons: {
-    marginTop: 20,
-  },
+ 
 });
 
 export default IndexScreen;

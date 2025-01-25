@@ -1,40 +1,30 @@
 import React from 'react';
-import { ImageBackground, Text, StyleSheet, View } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
-const Apple = () => {
+export default function AppleImagePage() {
+
+
   return (
-    <ImageBackground
-      source={{
-        uri: "https://th.bing.com/th/id/OIP.3-zrV5_l8F7c65Xr1DflrgHaHa?w=168&h=180&c=7&r=0&o=5&dpr=2&pid=1.7", // Use your actual image URL
-      }}
-      style={styles.cover} 
-    >
-      <View style={styles.overlay}>
-        <Text style={styles.fruitName}>Apple</Text>
-      </View>
-    </ImageBackground>
+    <View style={styles.container}>
+      <Image
+        source={{ uri: "https://th.bing.com/th/id/OIP.3-zrV5_l8F7c65Xr1DflrgHaHa?w=168&h=180&c=7&r=0&o=5&dpr=2&pid=1.7" }}
+        style={styles.image}
+      />
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  cover: {
-    width: 340,
-    height: 340,
-    borderRadius: 10,
-    overflow: "hidden", 
-    marginBottom: 10,
+  container: {
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-    borderRadius: 5,
-  },
-  fruitName: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
+  image: {
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
   },
 });
-
-export default Apple;
