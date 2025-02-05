@@ -3,7 +3,7 @@ import { Button, StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/ThemedText'; 
 import { ThemedView } from '@/components/ThemedView';  
 import { HelloWave } from '@/components/HelloWave';   
-import { FruitsComponent } from '../../components/FruitsComponent';  //import fruit component
+import { FruitsComponent } from '../../components/FruitsComponent';  // import fruit component
 import { Link } from 'expo-router'; 
 
 // Handle button press
@@ -30,6 +30,7 @@ const IndexScreen = () => {
         <Link href="/apple">Go to Apple</Link>
         <Link href="/orange">Go to Orange</Link>
         <Link href="/mango">Go to Mango</Link>
+        <Link href="/lab_3">Go to Lab 3</Link> 
       </View>
     </View>
   );
@@ -41,18 +42,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#990000'
   },
   titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  buttonContainer: {
-    marginTop: 20,
     marginBottom: 20,
   },
- 
+  buttonContainer: {
+    marginBottom: 20,
+  },
 });
 
 export default IndexScreen;
+
