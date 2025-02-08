@@ -1,80 +1,99 @@
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import React, { useState } from "react";
 import credentials from "../credentials.json";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 
-type SigninProps = {setIsSignedIn: (isSignedIn: boolean) => void, username: string, setusername: (username:string) => void}; 
-const Signin: React.FC<SigninProps> = ({setIsSignedIn, username, setusername}) => { //bringing in username from index.tsx the parent
-   // const [username, setusername] = useState<string>("");//makes the datatype have to be a string
-    const [password, setPassword] = useState("");
+const USERNAME_REGEX = /^.{5,}$/; // At least 5 characters
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    const router = useRouter();
-    const handleSingIn = () => {
-        //alert(`username: ${username}, Password:${password}`)};
-        const user = credentials.users.find((user) => user.username === username); //find username in the file and make sure it matches my username
-        if (user && user.password === password) {
-            //alert("Success!");
-            setIsSignedIn(true);
-        } 
-        else if (user && user.password !== password) {
-            alert("Invalid password");
-            //router.push("/recoverPassword"); forces routing
-        }
-        else {
-            alert("Login failed");
-           // router.push("/recoverPassword"); forces routing
-        }
-    }
-    // useEffect(() => { //anytime anything changes this function will be run  sets password and username
-    //     console.log("username:",username);
-    //     console.log("Password:",password);
-    // }, [username, password]);
-    
-    return (<View style={styles.container}>
-        <Text style={styles.text}>Sign in</Text>
-        <TextInput 
-        style={styles.input}
-        placeholder="username" 
-        value={username} 
-        onChangeText={setusername} //set username every time the text changes
-        />
-        <TextInput 
-        style={styles.input}
-        placeholder="Password" 
-        value={password}
-        onChangeText={setPassword}/>
-        <View style={styles.button}>
-            <Button title="Sign in" onPress={handleSingIn} color="#fff" />
-        </View>
-    </View>)
+interface SigninProps {
+  setIsSignedIn: (signedIn: boolean) => void;
+  username: string;
+  setusername: (username: string) => void;
 }
 
+const Signin: React.FC<SigninProps> = ({ setIsSignedIn, username, setusername }) => {
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const validateInputs = () => {
+    if (!USERNAME_REGEX.test(username)) {
+      Alert.alert("Validation Error", "Username must be at least 5 characters long.");
+      return false;
+    }
+
+    if (!PASSWORD_REGEX.test(password)) {
+      Alert.alert(
+        "Validation Error",
+        "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character."
+      );
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSignIn = () => {
+    if (!validateInputs()) return;
+
+    const user = credentials.users.find((user) => user.username === username);
+    if (user && user.password === password) {
+      setIsSignedIn(true);
+    } else if (user && user.password !== password) {
+      Alert.alert("Invalid password");
+    } else {
+      Alert.alert("Login failed");
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Sign in</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        value={username}
+        onChangeText={setusername}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+      <View style={styles.button}>
+        <Button title="Sign in" onPress={handleSignIn} color="#fff" />
+      </View>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        justifyContent: 'center',
-        backgroundColor: '#fff',
-        alignItems: 'center',
-    }, 
-    input:{
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 20,   
-        padding: 10,
-        borderRadius: 5,
-        width: 200
-    },
-    button: {
-        backgroundColor: '#e67e22',
-        paddingVertical: 15,
-        borderRadius: 10,
-        alignItems: 'center',
-        marginVertical: 20,
-        elevation: 4,
-      },
-    text: {fontSize: 20, color: '#000'},
-    recover: {fontSize: 16, color: 'blue', marginTop: 20}
-})
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    alignItems: "center",
+  },
+  input: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 20,
+    padding: 10,
+    borderRadius: 5,
+    width: 200,
+  },
+  button: {
+    backgroundColor: "#e67e22",
+    paddingVertical: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginVertical: 20,
+    elevation: 4,
+  },
+  text: { fontSize: 20, color: "#000" },
+});
 
 export default Signin;
