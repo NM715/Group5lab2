@@ -7,6 +7,7 @@ import { FruitsComponent } from '../../components/FruitsComponent';
 import { Link } from 'expo-router';
 import Signin from '../signin'; // Import the Signin page from one folder up
 
+
 const IndexScreen = () => {
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
   const [username, setusername] = useState<string>('');
@@ -85,6 +86,7 @@ const Welcome = ({
         </ThemedView>
       </ThemedView>
     </ScrollView>
+
   );
 };
 
@@ -157,7 +159,9 @@ const styles = StyleSheet.create({
     color: '#3498db',
     fontSize: 16,
     fontWeight: '500',
+
   },
 });
 
 export default IndexScreen;
+
