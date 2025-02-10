@@ -3,34 +3,24 @@ import { StyleSheet, View, Pressable, SafeAreaView, ScrollView } from 'react-nat
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { HelloWave } from '@/components/HelloWave';
-import { FruitsComponent } from '../../components/FruitsComponent';
 import { Link } from 'expo-router';
-import Signin from '../signin'; // Import the Signin page from one folder up
-
+import Signin from '../signin'; 
 
 const IndexScreen = () => {
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
-  const [username, setusername] = useState<string>('');
-  const [showFruits, setShowFruits] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>('');
+  const [showCity, setShowCity] = useState<boolean>(false); 
 
   const handlePress = () => {
-    setShowFruits(!showFruits);
+    setShowCity(!showCity);
   };
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       {isSignedIn ? (
-        <Welcome
-          username={username}
-          showFruits={showFruits}
-          handlePress={handlePress}
-        />
+        <Welcome username={username} showCity={showCity} handlePress={handlePress} />
       ) : (
-        <Signin
-          setIsSignedIn={setIsSignedIn}
-          username={username}
-          setusername={setusername}
-        />
+        <Signin setIsSignedIn={setIsSignedIn} username={username} setusername={setUsername} />
       )}
     </SafeAreaView>
   );
@@ -38,11 +28,9 @@ const IndexScreen = () => {
 
 const Welcome = ({
   username,
-  showFruits,
-  handlePress,
 }: {
   username: string;
-  showFruits: boolean;
+  showCity: boolean;
   handlePress: () => void;
 }) => {
   return (
@@ -54,39 +42,21 @@ const Welcome = ({
 
         <View style={styles.header}>
           <ThemedText type="title" style={styles.title}>
-            Fruit Market 🍎
+            My New App
           </ThemedText>
           <HelloWave />
         </View>
 
-        <Pressable
-          style={({ pressed }) => [
-            styles.mainButton,
-            pressed && styles.buttonPressed,
-          ]}
-          onPress={handlePress}
-        >
-          <ThemedText style={styles.buttonText}>
-            {showFruits ? 'Hide Fruits' : 'Show Fruits Menu'}
-          </ThemedText>
-        </Pressable>
-
-        {showFruits && <FruitsComponent />}
-
         <ThemedView style={styles.navContainer}>
-          <Link href="/apple" style={styles.navLink}>
-            <ThemedText style={styles.navText}>🍎 Apple</ThemedText>
+          <Link href="/calgary" style={styles.navLink}>
+            <ThemedText style={styles.navText}>Calgary</ThemedText>
           </Link>
-          <Link href="/orange" style={styles.navLink}>
-            <ThemedText style={styles.navText}>🍊 Orange</ThemedText>
-          </Link>
-          <Link href="/mango" style={styles.navLink}>
-            <ThemedText style={styles.navText}>🥭 Mango</ThemedText>
+          <Link href="/edmonton" style={styles.navLink}>
+            <ThemedText style={styles.navText}>Edmonton</ThemedText>
           </Link>
         </ThemedView>
       </ThemedView>
     </ScrollView>
-
   );
 };
 
@@ -97,8 +67,9 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     flexGrow: 1,
-    padding: 20,
+    padding: 25,
     justifyContent: 'center',
+    fontSize: 200,
   },
   container: {
     flex: 1,
@@ -126,14 +97,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  mainButton: {
-    backgroundColor: '#e67e22',
-    paddingVertical: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginVertical: 20,
-    elevation: 4,
-  },
+  
   buttonText: {
     color: '#fff',
     fontSize: 18,
@@ -144,9 +108,10 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.98 }],
   },
   navContainer: {
-    marginTop: 30,
+    marginTop: 500,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    backgroundColor: '#e67e22',
   },
   navLink: {
     backgroundColor: '#ecf0f1',
@@ -157,11 +122,9 @@ const styles = StyleSheet.create({
   },
   navText: {
     color: '#3498db',
-    fontSize: 16,
-    fontWeight: '500',
-
+    fontSize: 24,
+    fontWeight: 'bold',
   },
 });
 
 export default IndexScreen;
-
