@@ -47,8 +47,6 @@ const Welcome = ({
           <HelloWave />
         </View>
 
-
-
         <ThemedView style={styles.navContainer}>
           <Link href="/calgary" style={styles.navLink}>
             <ThemedText style={styles.navText}>Calgary</ThemedText>
