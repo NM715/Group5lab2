@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, Alert, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import React, { useState } from "react";
 import credentials from "../credentials.json";
 import { useRouter } from "expo-router";
@@ -47,34 +47,40 @@ const Signin: React.FC<SigninProps> = ({ setIsSignedIn, username, setusername })
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Sign in</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setusername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <View style={styles.button}>
-        <Button title="Sign in" onPress={handleSignIn} color="#fff" />
-      </View>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.text}>Sign in</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          value={username}
+          onChangeText={setusername}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
+        <View style={styles.button}>
+          <Button title="Sign in" onPress={handleSignIn} color="#fff" />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: "center",
     backgroundColor: "#fff",
     alignItems: "center",
+    paddingVertical: 20,
   },
   input: {
     height: 40,
@@ -93,7 +99,11 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     elevation: 4,
   },
-  text: { fontSize: 20, color: "#000" },
+  text: {
+    fontSize: 20,
+    color: "#000",
+    marginBottom: 20,
+  },
 });
 
 export default Signin;
