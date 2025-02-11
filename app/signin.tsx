@@ -1,10 +1,21 @@
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import React, { useState } from "react";
 import credentials from "../credentials.json";
 import { useRouter } from "expo-router";
 
-const USERNAME_REGEX = /^.{5,}$/; // At least 5 characters
-const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const USERNAME_REGEX = /^.{5,}$/;
+const PASSWORD_REGEX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 interface SigninProps {
   setIsSignedIn: (signedIn: boolean) => void;
@@ -12,7 +23,11 @@ interface SigninProps {
   setusername: (username: string) => void;
 }
 
-const Signin: React.FC<SigninProps> = ({ setIsSignedIn, username, setusername }) => {
+const Signin: React.FC<SigninProps> = ({
+  setIsSignedIn,
+  username,
+  setusername,
+}) => {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
@@ -47,53 +62,92 @@ const Signin: React.FC<SigninProps> = ({ setIsSignedIn, username, setusername })
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Sign in</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setusername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <View style={styles.button}>
-        <Button title="Sign in" onPress={handleSignIn} color="#fff" />
-      </View>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.background}
+    >
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.card}>
+          <Text style={styles.title}>Sign In</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            value={username}
+            onChangeText={setusername}
+            placeholderTextColor="#aaa"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+            placeholderTextColor="#aaa"
+          />
+          <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+            <Text style={styles.buttonText}>Sign In</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
+    backgroundColor: "#dfe6e9", // Light background color
+  },
+  container: {
+    flexGrow: 1,
     justifyContent: "center",
-    backgroundColor: "#fff",
     alignItems: "center",
+    paddingVertical: 40,
+  },
+  card: {
+    backgroundColor: "#fff",
+    padding: 25,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 5,
+    alignItems: "center",
+    width: 320,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "#2d3436",
+    marginBottom: 20,
   },
   input: {
-    height: 40,
-    borderColor: "gray",
+    height: 50,
+    borderColor: "#b2bec3",
     borderWidth: 1,
-    marginBottom: 20,
-    padding: 10,
-    borderRadius: 5,
-    width: 200,
+    backgroundColor: "#f1f2f6",
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    width: "100%",
+    marginBottom: 15,
+    fontSize: 16,
+    color: "#2d3436",
   },
   button: {
-    backgroundColor: "#e67e22",
-    paddingVertical: 15,
-    borderRadius: 10,
+    backgroundColor: "#0984e3", // Nice blue color
+    paddingVertical: 14,
+    width: "100%",
+    borderRadius: 8,
     alignItems: "center",
-    marginVertical: 20,
-    elevation: 4,
+    marginTop: 10,
+    elevation: 3,
   },
-  text: { fontSize: 20, color: "#000" },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
 });
 
 export default Signin;
