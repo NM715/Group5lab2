@@ -61,6 +61,10 @@ const Signin: React.FC<SigninProps> = ({
     }
   };
 
+  const handleCreateAccount = () => {
+    router.push("/createaccount"); // Navigate to create account page
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -87,6 +91,9 @@ const Signin: React.FC<SigninProps> = ({
           <TouchableOpacity style={styles.button} onPress={handleSignIn}>
             <Text style={styles.buttonText}>Sign In</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
+            <Text style={styles.createAccountText}>Create Account</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -96,7 +103,7 @@ const Signin: React.FC<SigninProps> = ({
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "#dfe6e9", // Light background color
+    backgroundColor: "#dfe6e9",
   },
   container: {
     flexGrow: 1,
@@ -135,7 +142,7 @@ const styles = StyleSheet.create({
     color: "#2d3436",
   },
   button: {
-    backgroundColor: "#0984e3", // Nice blue color
+    backgroundColor: "#0984e3",
     paddingVertical: 14,
     width: "100%",
     borderRadius: 8,
@@ -147,6 +154,14 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  createAccountButton: {
+    marginTop: 15,
+  },
+  createAccountText: {
+    color: "#0984e3",
+    fontSize: 16,
+    fontWeight: "600",
   },
 });
 
