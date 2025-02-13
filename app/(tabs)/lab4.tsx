@@ -24,9 +24,13 @@ export default function Lab4() {
               style={[styles.item, isSelected && styles.selectedItem]}
               onPress={() => toggleSelection(item.id)}
             >
-              <Text style={styles.text}>
-                {isSelected ? '✅ ' : ''}{item.location} - ${item.price} ({item.average_yearly_temperature})
-              </Text>
+              <View style={styles.textContainer}>
+                <Text style={[styles.text, isSelected && styles.selectedText]}>
+                  {isSelected ? '✅ ' : ''}{item.location}
+                </Text>
+              </View>
+              <Text style={styles.price}>${item.price}</Text>
+              <Text style={styles.temperature}>{item.average_yearly_temperature}</Text>
             </TouchableOpacity>
           );
         }}
@@ -36,9 +40,62 @@ export default function Lab4() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#fff' },
-  title: { fontSize: 18, fontWeight: 'bold', marginBottom: 10 },
-  item: { padding: 15, borderBottomWidth: 1, borderColor: '#ddd' },
-  selectedItem: { backgroundColor: '#d4edda' },
-  text: { fontSize: 16 },
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f5f5f5', // Light gray background for contrast
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 15,
+    marginTop: 40, // Moves title lower to avoid camera obstruction
+    color: '#333',
+  },
+  item: {
+    backgroundColor: '#fff',
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 12,
+    flexDirection: 'row', // Aligns items horizontally
+    alignItems: 'center',
+    justifyContent: 'space-between', // Ensures proper alignment
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3, // Shadow for Android
+  },
+  selectedItem: {
+    backgroundColor: '#d4edda', // Light green to indicate selection
+    borderWidth: 2,
+    borderColor: '#28a745',
+  },
+  textContainer: {
+    flex: 1, // Ensures text takes up space evenly
+  },
+  text: {
+    fontSize: 18,
+    color: '#333',
+    fontWeight: '500',
+  },
+  selectedText: {
+    fontWeight: 'bold',
+    color: '#155724',
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#007bff',
+    width: 80, // Ensures price stays aligned
+    textAlign: 'right',
+  },
+  temperature: {
+    fontSize: 14,
+    color: '#555',
+    width: 50, // Aligns temperature values
+    textAlign: 'right',
+  },
 });
+
+export default Lab4;
