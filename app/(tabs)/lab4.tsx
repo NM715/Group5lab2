@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import vacationDestinations from '@/constants/vacationDestinations';
 
-export default function Lab4() {
+export default function lab4() {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   const toggleSelection = (id: number) => {
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Lab4;
+export default lab4;

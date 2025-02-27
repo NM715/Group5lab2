@@ -22,7 +22,8 @@ function TabLayout() {
           ios: { position: 'absolute' },
           default: {},
         }),
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
@@ -37,12 +38,19 @@ function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
-      {/* ✅ Add Lab 4 to the tab navigation */}
       <Tabs.Screen
         name="lab4"
         options={{
           title: 'Lab 4',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.bullet" color={color} />,
+        }}
+      />
+      {/* Updated Lab 5 to match the correct route structure */}
+      <Tabs.Screen
+        name='lab5'
+        options={{
+          title: 'lab5',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="network" color={color} />,
         }}
       />
     </Tabs>
